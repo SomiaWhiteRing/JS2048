@@ -9,5 +9,13 @@ function showNumberWithAnimation(i,j,number){
         height:"100px",
         top:getPosTop(i,j),
         left:getPosLeft(i,j)
+    },100)
+}
+
+function showMoveAnimation(fx,fy,tx,ty){
+    var theNumberCell = $("#number-cell-" + fx + "-" + fy);
+    theNumberCell.animate({
+        top:getPosTop(tx,ty),
+        left:getPosLeft(tx,ty)
     },200)
 }
