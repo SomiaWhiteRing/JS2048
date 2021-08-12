@@ -19,3 +19,7 @@ function showMoveAnimation(fx,fy,tx,ty){
         left:getPosLeft(tx,ty)
     },200)
 }
+
+function updateScore(){
+    $('#score').text(score);
+}
