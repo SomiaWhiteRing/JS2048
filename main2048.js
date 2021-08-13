@@ -71,13 +71,28 @@ function generateNewNumber(){
         return false;
     }
     //生成数字与对应的位置
+    /*旧随机算法
     while(true){
         var randx = parseInt(4*Math.random());
         var randy = parseInt(4*Math.random());
         if (board[randx][randy] == 0){
             break;
         }
+    }*/
+    //优化后的随机算法,防止产生冗余循环
+    var spacetemp = Array()
+    for(var i = 0 ; i <= 3 ; i++){
+        for(var j = 0 ; j <= 3 ; j++){
+            if(board[i][j] == 0){
+                var temp = [i,j];
+                spacetemp.push(temp);
+            }
+        }
     }
+    rand = spacetemp[Math.floor(spacetemp.length*Math.random())];
+    var randx = rand[0];
+    var randy = rand[1];
+    
     var randNumber = 2*Math.floor(2*Math.random()+1);
     board[randx][randy] = randNumber;
     showNumberWithAnimation(randx,randy,randNumber);
