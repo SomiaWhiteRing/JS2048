@@ -168,6 +168,17 @@ document.addEventListener("touchend",function(event){
     }
 })
 
+//debug:阻止Android端Chrome下拉刷新
+var lastY = 0;
+window.addEventListener('touchmove', function (e) {
+    var scrolly = window.pageYOffset || window.scrollTop || 0;
+    var direction = e.changedTouches[0].pageY > lastY ? 1 : -1;
+    if (direction > 0 && scrolly === 0) {
+        e.preventDefault();
+    }
+    lastY = e.changedTouches[0].pageY;
+}, {passive: false});
+
 //随按键更新游戏数据
 $(document).keydown( function ( event ) { 
     //防止按键触发其他页面操作
