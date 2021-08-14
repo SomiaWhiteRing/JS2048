@@ -3,8 +3,33 @@ var score = 0;
 var hasConflicated = Array();
 
 $(document).ready(function () {
+    setMobile();
     newgame();
 });
+
+//移动端适配
+function setMobile(){
+
+    //在较大屏幕上不进行适配
+    if (documentWidth > 500){
+        gridContainerWidth = 500;
+        cellSideWidth = 100;
+        cellSpace = 20;
+    }
+
+    $("#grid-container").css("width", gridContainerWidth - 2 * cellSpace);
+    $("#grid-container").css("height", gridContainerWidth - 2 * cellSpace);
+    $("#grid-container").css("padding", cellSpace);
+    $("#grid-container").css("border-radius", 0.02 * gridContainerWidth );
+
+    $(".grid-cell").css("width", cellSideWidth);
+    $(".grid-cell").css("height", cellSideWidth);
+    $(".grid-cell").css("border-radius", 0.03 * cellSideWidth);
+
+    $(".number-cell").css("line-height",cellSideWidth + "px");
+    $(".number-cell").css("font-size",0.6 * cellSideWidth + "px");
+    $(".number-cell").css("border-radius",0.03 * cellSideWidth);
+}
 
 function newgame(){
     //初始化格子配置
@@ -49,11 +74,11 @@ function updateBoardView(){
             if (board[i][j] == 0){
                 theNumberCell.css('width',"0px");
                 theNumberCell.css('height',"0px");
-                theNumberCell.css('top',getPosTop(i,j)+50);
-                theNumberCell.css('left',getPosLeft(i,j)+50);
+                theNumberCell.css('top',getPosTop(i,j)+ 0.5 * cellSideWidth);
+                theNumberCell.css('left',getPosLeft(i,j)+ 0.5 * cellSideWidth);
             }else{
-                theNumberCell.css('width',"100px");
-                theNumberCell.css('height',"100px");
+                theNumberCell.css('width',cellSideWidth);
+                theNumberCell.css('height',cellSideWidth);
                 theNumberCell.css('top',getPosTop(i,j));
                 theNumberCell.css('left',getPosLeft(i,j));
                 theNumberCell.css('background-color',getNumberBackgroundColor(board[i][j]));
@@ -63,6 +88,9 @@ function updateBoardView(){
             hasConflicated[i][j] = false;
         }
     }
+    $(".number-cell").css("line-height",cellSideWidth + "px");
+    $(".number-cell").css("font-size",0.6 * cellSideWidth + "px");
+    $(".number-cell").css("border-radius",0.03 * cellSideWidth);
 }
 
 function generateNewNumber(){
