@@ -32,11 +32,11 @@ function getNumberBackgroundColor(i){
         return "black";
     }
 }
-function getNumberColor(i){
+function getFontSize(i){
     if(i<=512){
-        return "#776e65";
+        return 0.6 * cellSideWidth + "px";
     }else{
-        return "white"
+        return 0.4 * cellSideWidth + "px";
     }
 
 }

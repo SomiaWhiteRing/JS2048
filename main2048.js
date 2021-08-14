@@ -82,14 +82,13 @@ function updateBoardView(){
                 theNumberCell.css('top',getPosTop(i,j));
                 theNumberCell.css('left',getPosLeft(i,j));
                 theNumberCell.css('background-color',getNumberBackgroundColor(board[i][j]));
-                theNumberCell.css('color',getNumberColor(board[i][j]));
+                theNumberCell.css('font-size',getFontSize(board[i][j]));
                 theNumberCell.text(board[i][j]);
             }
             hasConflicated[i][j] = false;
         }
     }
     $(".number-cell").css("line-height",cellSideWidth + "px");
-    $(".number-cell").css("font-size",0.6 * cellSideWidth + "px");
     $(".number-cell").css("border-radius",0.03 * cellSideWidth);
 }
 
