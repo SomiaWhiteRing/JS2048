@@ -10,7 +10,7 @@ $(document).ready(function () {
 //移动端适配
 function setMobile(){
 
-    //在较大屏幕上不进行适配
+    //在较大屏幕上不进行适配,采用固定大小
     if (documentWidth > 500){
         gridContainerWidth = 500;
         cellSideWidth = 100;
@@ -127,8 +127,52 @@ function generateNewNumber(){
 
 }
 
+//检测触控方向
+document.addEventListener("touchstart",function(event){
+    startX = event.touches[0].pageX;
+    startY = event.touches[0].pageY;
+})
+document.addEventListener("touchend",function(event){
+    endX = event.changedTouches[0].pageX;
+    endY = event.changedTouches[0].pageY;
+    //触发移动事件
+    xMoved = endX - startX ;
+    yMoved = endY - startY ;
+
+    if (Math.abs(xMoved) > Math.abs(yMoved)){//左右移动
+        if (xMoved < 0 && Math.abs(xMoved)>cellSideWidth){//向左移动
+            if(moveLeft()){
+                setTimeout("generateNewNumber()",205);
+                setTimeout("isGameOver()",310);
+            }
+        }
+        if (xMoved > 0 && Math.abs(xMoved)>cellSideWidth){//向右移动
+            if(moveRight()){
+                setTimeout("generateNewNumber()",205);
+                setTimeout("isGameOver()",310);
+            }
+        }
+    }else{//上下移动
+        if (yMoved > 0 && Math.abs(yMoved)>cellSideWidth){//向下移动
+            if(moveDown()){
+                setTimeout("generateNewNumber()",205);
+                setTimeout("isGameOver()",310);
+            }
+        }
+        if (yMoved < 0 && Math.abs(yMoved)>cellSideWidth){//向上移动
+            if(moveUp()){
+                setTimeout("generateNewNumber()",205);
+                setTimeout("isGameOver()",310);
+            }
+        }
+    }
+})
+
 //随按键更新游戏数据
 $(document).keydown( function ( event ) { 
+    //防止按键触发其他页面操作
+    event.preventDefault();
+
     switch(event.keyCode){
         case 37://左
             if(moveLeft()){
